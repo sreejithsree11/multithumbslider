@@ -1,0 +1,24 @@
+.aud-thumb-wrapper {
+	display: block;
+	width: 100%;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+.aud-thumb-wrapper .aud-thumb-inner-wrapper {
+	position: relative;
+  overflow: hidden;
+}
+.aud-thumb-wrapper .aud-thumb-inner-wrapper .aud-thumb-inner-stage-wrapper {
+  position: relative;
+  /*transition: all 800ms ease;*/
+  margin: 0 auto;
+}
+.aud-thumb-wrapper .aud-thumb-inner-wrapper .aud-thumb-inner-stage-wrapper .item {
+	display: inline;
+	float: left;
+}
+.aud-thumb-wrapper .aud-thumb-inner-wrapper .aud-thumb-inner-stage-wrapper .item img {
+	width: 100%;
+}
+
