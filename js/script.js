@@ -1,8 +1,10 @@
 
 $(document).ready(function() {
-	$('#test').audThumb({
-		margin: 10,
-		responsive: {
+  $('#test').audThumb({
+    margin: 10,
+    transitionType: 'fullTransition', // singleTransition/fullTransition
+    transitionMod: 'slide',  // slide/fade
+    responsive: {
         0: {
           items: 2,
         },
@@ -13,5 +15,5 @@ $(document).ready(function() {
           items: 3,
         }
       }
-	});
+  });
 });

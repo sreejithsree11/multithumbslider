@@ -11,8 +11,10 @@
 }
 .aud-thumb-wrapper .aud-thumb-inner-wrapper .aud-thumb-inner-stage-wrapper {
   position: relative;
-  /*transition: all 800ms ease;*/
   margin: 0 auto;
+}
+.aud-thumb-wrapper .aud-thumb-inner-wrapper .aud-thumb-inner-stage-wrapper.aud-easy-slide {
+  transition: all 800ms ease;
 }
 .aud-thumb-wrapper .aud-thumb-inner-wrapper .aud-thumb-inner-stage-wrapper .item {
 	display: inline;
