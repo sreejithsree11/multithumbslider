@@ -1,20 +1,12 @@
 $.fn.extend({
     audThumb: function (obj) {
-
-      var winWidth = $(window).width();
       
-      if(winWidth > 1000) {
-          var numberPerviewPort = obj.responsive[1000]['items'];
-      }
-      else if (600 < winWidth < 1000) {
-          var numberPerviewPort = obj.responsive[600]['items'];
-      }
-      else if (winWidth < 600){
-          var numberPerviewPort = obj.responsive[0]['items'];
-      }
-      else {
-          var numberPerviewPort = 1;  
-      }
+      var responsiveNumbers1000 = obj.responsive[1000]['items'];
+      var responsiveNumbers600 = obj.responsive[600]['items'];
+      var responsiveNumbers0 = obj.responsive[0]['items'];
+
+      // getting number of sliders showing in a view port.
+      var numberPerviewPort = getNumberPerviewPort(responsiveNumbers1000,responsiveNumbers600,responsiveNumbers0);
 
       $(this).addClass('aud-thumb-wrapper');
         
@@ -69,20 +61,22 @@ $.fn.extend({
         transitionModChoosIn(obj.transitionMod);
       }, 1000);
       
+      // Condition checking for single image transition.
+      if(obj.transitionType == 'singleTransition') {
+        itemCountWidthForTrans = itemWidth;
+      }
+
       //  Intervel function 
       var intervalID = setInterval(function() {
-        if (obj.transitionType == 'fullTransition') {
-
           var addedTransactionIndex = parseInt(transformIndex) + parseInt(itemCountWidthForTrans); 
           
           transformIndex = idexDiv * addedTransactionIndex;
-        }
-        // var addedTransactionIndex = parseInt(transformIndex) + parseInt(itemCountWidthForTrans); 
-        
-        // transformIndex = idexDiv * addedTransactionIndex;
         
         if(transformIndex < balanceItemWidth) {
-          itemCountWidthForTrans = itemCountWidth;
+          if (obj.transitionType == 'fullTransition') {
+            itemCountWidthForTrans = itemCountWidth;
+          }
+
           // Choosing the transition out mode - fade/slide
           transitionModChoosOut(obj.transitionMod);
           setTimeout(function(){ 
@@ -154,6 +148,12 @@ function transitionModChoosOut(transitionMod) {
   }
 }
 
+
+/**
+* Function for checking the transition mode.
+* @param transitionMod
+*  transitionMod that configured in function initialization time by the user.
+**/
 function transitionModChoosIn(transitionMod) {
   switch(transitionMod) {
     case 'fade':
@@ -165,4 +165,31 @@ function transitionModChoosIn(transitionMod) {
     default:
         
   }
+}
+
+/**
+* Function for calculating the slider numbers, that going to show in a single port view.
+* @param responsiveNumbers
+*  number that configured in function initialization time by the user.
+* @return
+*  Number of item to show in the current window width.
+**/
+function getNumberPerviewPort(responsiveNumbers1000,responsiveNumbers600,responsiveNumbers0) {
+  
+  var winWidth = $(window).width();
+
+  if(winWidth > 1000) {
+      var getNumber = responsiveNumbers1000;
+  }
+  else if (( 600 < winWidth ) && ( winWidth < 1000)) {
+      var getNumber = responsiveNumbers600;
+  }
+  else if (winWidth < 600){
+      var getNumber = responsiveNumbers0;
+  }
+  else {
+      var getNumber = 1;  
+  }
+
+  return getNumber;
 }
